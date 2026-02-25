@@ -1,0 +1,147 @@
+import json
+
+new_data = '''export const conditionTranslations = {
+  en: {
+    asthma: "Asthma Attack",
+    choking: "Choking",
+    pneumonia: "Pneumonia",
+    tuberculosis: "Tuberculosis",
+    burns: "Burns",
+    fracture: "Fractures",
+    bleeding: "Severe Bleeding",
+    tetanus: "Tetanus",
+    rabies: "Rabies Risk",
+    suicide: "Suicide Risk",
+    malaria: "Malaria",
+    dengue: "Dengue",
+    cholera: "Cholera",
+    diarrhea: "Severe Diarrhea / Gastroenteritis",
+    skin_infection: "Skin Infections",
+    worm_infection: "Parasitic Worm Infections",
+    anemia: "Anemia",
+    malnutrition: "Malnutrition",
+    chickenpox: "Chicken Pox",
+    heatstroke: "Heat Stroke",
+    hypothermia: "Hypothermia",
+    poisoning: "Poisoning",
+    kidney_disease: "Kidney Disease Complications",
+    pregnancy: "Pregnancy Complications"
+  },
+  hi: {
+    asthma: "दमा का दौरा",
+    choking: "घुटन",
+    pneumonia: "निमोनिया",
+    tuberculosis: "तपेदिक (टीबी)",
+    burns: "जलन",
+    fracture: "फ्रैक्चर",
+    bleeding: "गंभीर रक्तस्राव",
+    tetanus: "टेटनस",
+    rabies: "रेबीज का जोखिम",
+    suicide: "आत्महत्या का जोखिम",
+    malaria: "मलेरिया",
+    dengue: "डेंगू",
+    cholera: "हैज़ा",
+    diarrhea: "गंभीर दस्त / गैस्ट्रोएंटेराइटिस",
+    skin_infection: "त्वचा संक्रमण",
+    worm_infection: "परजीवी कृमि संक्रमण",
+    anemia: "एनीमिया",
+    malnutrition: "कुपोषण",
+    chickenpox: "चिकनपॉक्स",
+    heatstroke: "लू लगना",
+    hypothermia: "हाइपोथर्मिया",
+    poisoning: "विषाक्तता",
+    kidney_disease: "गुर्दे की बीमारी की जटिलताएं",
+    pregnancy: "गर्भावस्था की जटिलताएं"
+  },
+  te: {
+    asthma: "ఆస్తమా దాడి",
+    choking: "ఉక్కిరిబిక్కిరి",
+    pneumonia: "న్యుమోనియా",
+    tuberculosis: "క్షయవ్యాధి",
+    burns: "కాలిన గాయాలు",
+    fracture: "ఎముక పగుళ్లు",
+    bleeding: "తీవ్రమైన రక్తస్రావం",
+    tetanus: "టెటానస్",
+    rabies: "రేబిస్ ప్రమాదం",
+    suicide: "ఆత్మహత్య ప్రమాదం",
+    malaria: "మలేరియా",
+    dengue: "డెంగ్యూ",
+    cholera: "కలరా",
+    diarrhea: "తీవ్రమైన అతిసారం",
+    skin_infection: "చర్మ అంటువ్యాధులు",
+    worm_infection: "పరాన్నజీవి పురుగు అంటువ్యాధులు",
+    anemia: "రక్తహీనత",
+    malnutrition: "పోషకాహార లోపం",
+    chickenpox: "ఆటలమ్మ",
+    heatstroke: "వేడి దెబ్బ",
+    hypothermia: "అల్ప ఉష్ణోగ్రత",
+    poisoning: "విషప్రయోగం",
+    kidney_disease: "మూత్రపిండాల వ్యాధి సమస్యలు",
+    pregnancy: "గర్భధారణ సమస్యలు"
+  },
+  ta: {
+    asthma: "ஆஸ்துமா தாக்குதல்",
+    choking: "மூச்சுத்திணறல்",
+    pneumonia: "நிமோனியா",
+    tuberculosis: "காசநோய்",
+    burns: "தீக்காயங்கள்",
+    fracture: "எலும்பு முறிவுகள்",
+    bleeding: "கடுமையான இரத்தப்போக்கு",
+    tetanus: "டெட்டனஸ்",
+    rabies: "ரேபிஸ் ஆபத்து",
+    suicide: "தற்கொலை ஆபத்து",
+    malaria: "மலேரியா",
+    dengue: "டெங்கு",
+    cholera: "காலரா",
+    diarrhea: "கடுமையான வயிற்றுப்போக்கு",
+    skin_infection: "தோல் தொற்றுகள்",
+    worm_infection: "ஒட்டுண்ணி புழு தொற்றுகள்",
+    anemia: "இரத்த சோகை",
+    malnutrition: "ஊட்டச்சத்து குறைபாடு",
+    chickenpox: "சின்னம்மை",
+    heatstroke: "வெப்ப பக்கவாதம்",
+    hypothermia: "குறைந்த உடல் வெப்பநிலை",
+    poisoning: "விஷம்",
+    kidney_disease: "சிறுநீரக நோய் சிக்கல்கள்",
+    pregnancy: "கர்ப்ப சிக்கல்கள்"
+  },
+  kn: {
+    asthma: "ಆಸ್ತಮಾ ದಾಳಿ",
+    choking: "ಉಸಿರುಗಟ್ಟುವಿಕೆ",
+    pneumonia: "ನ್ಯುಮೋನಿಯಾ",
+    tuberculosis: "ಕ್ಷಯರೋಗ",
+    burns: "ಸುಟ್ಟಗಾಯಗಳು",
+    fracture: "ಮೂಳೆ ಮುರಿತಗಳು",
+    bleeding: "ತೀವ್ರ ರಕ್ತಸ್ರಾವ",
+    tetanus: "ಟೆಟನಸ್",
+    rabies: "ರೇಬಿಸ್ ಅಪಾಯ",
+    suicide: "ಆತ್ಮಹತ್ಯೆ ಅಪಾಯ",
+    malaria: "ಮಲೇರಿಯಾ",
+    dengue: "ಡೆಂಗ್ಯೂ",
+    cholera: "ಕಾಲರಾ",
+    diarrhea: "ತೀವ್ರ ಅತಿಸಾರ",
+    skin_infection: "ಚರ್ಮದ ಸೋಂಕುಗಳು",
+    worm_infection: "ಪರಾವಲಂಬಿ ಹುಳು ಸೋಂಕುಗಳು",
+    anemia: "ರಕ್ತಹೀನತೆ",
+    malnutrition: "ಅಪೌಷ್ಟಿಕತೆ",
+    chickenpox: "ಚಿಕನ್‌ಪಾಕ್ಸ್",
+    heatstroke: "ಶಾಖದ ಪಾರ್ಶ್ವವಾಯು",
+    hypothermia: "ಕಡಿಮೆ ದೇಹ ಉಷ್ಣತೆ",
+    poisoning: "ವಿಷ",
+    kidney_disease: "ಮೂತ್ರಪಿಂಡ ಕಾಯಿಲೆ ತೊಡಕುಗಳು",
+    pregnancy: "ಗರ್ಭಧಾರಣೆಯ ತೊಡಕುಗಳು"
+  }
+};
+'''
+
+with open('c:/Users/LENOVO/Desktop/sirisha/project/src/i18n/translations.js', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+start_idx = content.find('export const conditionTranslations = {')
+if start_idx != -1:
+    new_file_content = content[:start_idx] + new_data
+    with open('c:/Users/LENOVO/Desktop/sirisha/project/src/i18n/translations.js', 'w', encoding='utf-8') as f:
+        f.write(new_file_content)
+    print("Updated translations.js successfully")
+else:
+    print("Could not find conditionTranslations in translations.js")
